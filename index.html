@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termin - تسجيل الدخول</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #17212B;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      width: 90px;
+      height: 90px;
+      background: #2AABEE;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 30px rgba(42,171,238,0.4);
+      font-size: 40px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      color: #8E9EAB;
+      font-size: 15px;
+    }
+
+    /* Card */
+    .card {
+      background: #232E3C;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Step */
+    .step {
+      display: none;
+    }
+    .step.active {
+      display: block;
+    }
+
+    /* Phone Input */
+    .phone-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .prefix {
+      background: #17212B;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 14px;
+      color: #2AABEE;
+      font-weight: bold;
+      font-size: 16px;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    input {
+      background: #17212B;
+      border: 1.5px solid transparent;
+      border-radius: 10px;
+      padding: 14px 16px;
+      color: white;
+      font-size: 16px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      direction: ltr;
+    }
+
+    input:focus {
+      border-color: #2AABEE;
+    }
+
+    input::placeholder {
+      color: #8E9EAB;
+    }
+
+    /* Button */
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: #2AABEE;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #1a9bde;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Error */
+    .error-box {
+      background: rgba(255,59,48,0.1);
+      border: 1px solid rgba(255,59,48,0.3);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 16px;
+      color: #FF3B30;
+      font-size: 14px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .error-box.show {
+      display: flex;
+    }
+
+    /* Success */
+    .success-box {
+      background: rgba(96,208,102,0.1);
+      border: 1px solid rgba(96,208,102,0.3);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      color: #60D066;
+      font-size: 14px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      line-height: 1.6;
+    }
+
+    .success-box.show {
+      display: flex;
+    }
+
+    /* Code Display */
+    .code-display {
+      background: #17212B;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .code-number {
+      font-size: 40px;
+      font-weight: bold;
+      letter-spacing: 8px;
+      color: #2AABEE;
+    }
+
+    .code-label {
+      color: #8E9EAB;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    /* Timer */
+    .timer {
+      text-align: center;
+      color: #8E9EAB;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .timer span {
+      color: #2AABEE;
+      font-weight: bold;
+    }
+
+    /* Warning */
+    .warning-box {
+      background: rgba(255,149,0,0.1);
+      border-radius: 10px;
+      padding: 12px;
+      color: #FF9500;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+
+    /* Profile card */
+    .profile-found {
+      display: none;
+      background: #17212B;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 16px;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .profile-found.show {
+      display: flex;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      background: #2AABEE;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .profile-info h3 {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .profile-info p {
+      color: #2AABEE;
+      font-size: 13px;
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      color: #8E9EAB;
+      font-size: 12px;
+      margin-top: 16px;
+    }
+
+    /* Back button */
+    .back-btn {
+      background: none;
+      border: none;
+      color: #2AABEE;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 16px;
+      padding: 0;
+    }
+
+    .verified-badge {
+      background: #2AABEE;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">📨</div>
+    <h1>Termin</h1>
+    <p>تسجيل الدخول عبر رقم الحساب</p>
+  </div>
+
+  <!-- Step 1: إدخال الرقم -->
+  <div class="card">
+    <div id="step1" class="step active">
+      <div class="card-title">
+        📱 أدخل رقم حسابك
+      </div>
+
+      <div id="errorBox" class="error-box">
+        <span>⚠️</span>
+        <span id="errorMsg"></span>
+      </div>
+
+      <div class="phone-row">
+        <div class="prefix">+666</div>
+        <input
+          type="tel"
+          id="phoneInput"
+          placeholder="000000000 (9 أرقام)"
+          maxlength="9"
+          oninput="this.value=this.value.replace(/\D/g,'')"
+        />
+      </div>
+
+      <div id="profileFound" class="profile-found">
+        <div class="avatar" id="avatarLetter">؟</div>
+        <div class="profile-info">
+          <h3 id="profileName"></h3>
+          <p id="profileUsername"></p>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="sendBtn" onclick="sendCode()">
+        <span>إرسال الكود</span>
+      </button>
+
+      <div class="warning-box">
+        ⚠️ سيتم إرسال كود التحقق إلى حساب <strong>Termin</strong> الخاص بك داخل التطبيق.
+        تأكد من أن لديك وصولاً للتطبيق.
+      </div>
+    </div>
+
+    <!-- Step 2: عرض الكود وتأكيده -->
+    <div id="step2" class="step">
+      <button class="back-btn" onclick="goBack()">
+        ← رجوع
+      </button>
+
+      <div class="card-title">
+        🔐 تم إرسال الكود
+      </div>
+
+      <div class="success-box show">
+        ✅ تم إرسال رمز التحقق إلى حسابك في تطبيق <strong>Termin</strong>.
+        افتح التطبيق وتحقق من رسائل <strong>Termin <span class="verified-badge">✓</span></strong>
+      </div>
+
+      <div class="code-display" id="codeDisplay" style="display:none">
+        <div class="code-label">رمز التحقق الخاص بك</div>
+        <div class="code-number" id="codeNumber"></div>
+        <div class="code-label">أدخله في التطبيق لتسجيل الدخول</div>
+      </div>
+
+      <div class="timer" id="timerBox">
+        انتهاء صلاحية الكود خلال: <span id="countdown">05:00</span>
+      </div>
+
+      <div class="warning-box">
+        🔒 رمز الدخول سري. لا تعطه أبدًا لأي شخص كان، حتى لو ادعى أنه من Termin!<br><br>
+        ❗️هذا الرمز يمكن استخدامه لتسجيل الدخول إلى حسابك على Termin. نحن لا نطلبه أبدًا لأي شيءٍ آخر.<br><br>
+        إذا لم يكن أنت من طلب هذا الرمز، ما عليك سوى تجاهل هذه الرسالة.
+      </div>
+
+      <div style="margin-top: 16px;">
+        <button class="btn btn-primary" id="resendBtn" onclick="resendCode()" style="background:#1C2733; border: 1px solid #2AABEE; color: #2AABEE;">
+          إعادة إرسال الكود
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Termin © 2024 · جميع الحقوق محفوظة
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://fmlwcghmqhlgppaxuwdu.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtbHdjZ2htcWhsZ3BwYXh1d2R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1MjE3NjYsImV4cCI6MjA5NTA5Nzc2Nn0.D2Zsf-paXX_pI0EWyoaZGkDO0pwmNAqV5Weh2mCvSno';
+  const TERMIN_ID = '00000000-0000-0000-0000-000000000001';
+
+  let currentProfile = null;
+  let generatedCode = '';
+  let timerInterval = null;
+
+  // جلب بيانات المستخدم عند الكتابة
+  let searchTimeout = null;
+  document.getElementById('phoneInput').addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    const val = this.value;
+    if (val.length >= 9) {
+      searchTimeout = setTimeout(() => lookupProfile(val), 500);
+    } else {
+      hideProfile();
+    }
+  });
+
+  async function supabaseGet(table, filters) {
+    let url = `${SUPABASE_URL}/rest/v1/${table}?${filters}&select=*`;
+    const res = await fetch(url, {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+      }
+    });
+    return await res.json();
+  }
+
+  async function supabasePost(table, data) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation',
+      },
+      body: JSON.stringify(data),
+    });
+    return await res.json();
+  }
+
+  async function lookupProfile(digits) {
+    const phone = `+666${digits}`;
+    try {
+      const data = await supabaseGet('profiles',
+        `phone=eq.${encodeURIComponent(phone)}`);
+      if (data && data.length > 0) {
+        currentProfile = data[0];
+        showProfile(currentProfile);
+      } else {
+        hideProfile();
+      }
+    } catch(e) {}
+  }
+
+  function showProfile(p) {
+    const name = p.display_name || 'مستخدم';
+    document.getElementById('avatarLetter').textContent = name[0].toUpperCase();
+    document.getElementById('profileName').textContent = name;
+    document.getElementById('profileUsername').textContent = `@${p.username || ''}`;
+    document.getElementById('profileFound').classList.add('show');
+  }
+
+  function hideProfile() {
+    currentProfile = null;
+    document.getElementById('profileFound').classList.remove('show');
+  }
+
+  function showError(msg) {
+    const box = document.getElementById('errorBox');
+    document.getElementById('errorMsg').textContent = msg;
+    box.classList.add('show');
+    setTimeout(() => box.classList.remove('show'), 4000);
+  }
+
+  function generateCode() {
+    return Math.floor(10000 + Math.random() * 90000).toString();
+  }
+
+  async function sendCode() {
+    const digits = document.getElementById('phoneInput').value.trim();
+
+    if (digits.length !== 9) {
+      showError('يجب أن يكون الرقم 9 أرقام بعد +666');
+      return;
+    }
+
+    const phone = `+666${digits}`;
+    const btn = document.getElementById('sendBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spinner"></div> جاري الإرسال...';
+
+    try {
+      // البحث عن المستخدم
+      const profiles = await supabaseGet('profiles',
+        `phone=eq.${encodeURIComponent(phone)}`);
+
+      if (!profiles || profiles.length === 0) {
+        showError('رقم الحساب غير موجود. تحقق من الرقم وحاول مرة أخرى.');
+        return;
+      }
+
+      const profile = profiles[0];
+      currentProfile = profile;
+      generatedCode = generateCode();
+
+      // البحث عن محادثة موجودة مع Termin
+      const chats = await supabaseGet('chats',
+        `type=eq.private&member_ids=cs.{${profile.id},${TERMIN_ID}}`);
+
+      let chatId;
+      if (chats && chats.length > 0) {
+        chatId = chats[0].id;
+      } else {
+        // إنشاء محادثة جديدة
+        const newChat = await supabasePost('chats', {
+          type: 'private',
+          member_ids: [profile.id, TERMIN_ID],
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        });
+        chatId = newChat[0]?.id;
+      }
+
+      if (!chatId) {
+        showError('حدث خطأ. حاول مرة أخرى.');
+        return;
+      }
+
+      // إرسال الكود عبر حساب Termin
+      const msgId = `${Date.now()}web`;
+      await supabasePost('messages', {
+        id: msgId,
+        chat_id: chatId,
+        sender_id: TERMIN_ID,
+        content: `🔐 رمز تسجيل الدخول: ${generatedCode}\n\nلا تعطه أبدًا لأي شخص كان، حتى لو ادعى أنه من Termin!\n\n❗️هذا الرمز يمكن استخدامه لتسجيل الدخول إلى حسابك على Termin. نحن لا نطلبه أبدًا لأي شيءٍ آخر.\n\nإذا لم يكن أنت من طلب هذا الرمز من خلال محاولتك تسجيل الدخول على جهاز آخر؛ ما عليك سوى تجاهل هذه الرسالة.`,
+        type: 'text',
+        status: 'sent',
+        read_by: [],
+        is_deleted: false,
+        is_edited: false,
+        created_at: new Date().toISOString(),
+      });
+
+      // الانتقال للخطوة 2
+      document.getElementById('step1').classList.remove('active');
+      document.getElementById('step2').classList.add('active');
+
+      // عرض الكود (للتطوير فقط - في الإنتاج لا تعرضه)
+      // document.getElementById('codeDisplay').style.display = 'block';
+      // document.getElementById('codeNumber').textContent = generatedCode;
+
+      // تشغيل العداد
+      startTimer(300);
+
+    } catch(e) {
+      showError('حدث خطأ في الاتصال. تحقق من الإنترنت وحاول مجدداً.');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<span>إرسال الكود</span>';
+    }
+  }
+
+  function startTimer(seconds) {
+    clearInterval(timerInterval);
+    let remaining = seconds;
+
+    timerInterval = setInterval(() => {
+      remaining--;
+      const mins = Math.floor(remaining / 60).toString().padStart(2, '0');
+      const secs = (remaining % 60).toString().padStart(2, '0');
+      document.getElementById('countdown').textContent = `${mins}:${secs}`;
+
+      if (remaining <= 0) {
+        clearInterval(timerInterval);
+        document.getElementById('timerBox').innerHTML =
+          '⏰ انتهت صلاحية الكود. <a href="#" onclick="goBack()" style="color:#2AABEE">اطلب كوداً جديداً</a>';
+      }
+    }, 1000);
+  }
+
+  async function resendCode() {
+    clearInterval(timerInterval);
+    goBack();
+    setTimeout(() => {
+      if (currentProfile) {
+        document.getElementById('phoneInput').value =
+          currentProfile.phone.replace('+666', '');
+        showProfile(currentProfile);
+      }
+    }, 100);
+  }
+
+  function goBack() {
+    clearInterval(timerInterval);
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('step1').classList.add('active');
+    document.getElementById('phoneInput').value = '';
+    hideProfile();
+  }
+</script>
+</body>
+</html>
