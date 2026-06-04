@@ -24,7 +24,6 @@
       padding: 20px;
     }
 
-    /* Header */
     .header {
       text-align: center;
       margin-bottom: 40px;
@@ -54,7 +53,6 @@
       font-size: 15px;
     }
 
-    /* Card */
     .card {
       background: #232E3C;
       border-radius: 16px;
@@ -71,15 +69,9 @@
       gap: 8px;
     }
 
-    /* Step */
-    .step {
-      display: none;
-    }
-    .step.active {
-      display: block;
-    }
+    .step { display: none; }
+    .step.active { display: block; }
 
-    /* Phone Input */
     .phone-row {
       display: flex;
       gap: 10px;
@@ -111,15 +103,9 @@
       direction: ltr;
     }
 
-    input:focus {
-      border-color: #2AABEE;
-    }
+    input:focus { border-color: #2AABEE; }
+    input::placeholder { color: #8E9EAB; }
 
-    input::placeholder {
-      color: #8E9EAB;
-    }
-
-    /* Button */
     .btn {
       width: 100%;
       padding: 14px;
@@ -135,21 +121,10 @@
       gap: 8px;
     }
 
-    .btn-primary {
-      background: #2AABEE;
-      color: white;
-    }
+    .btn-primary { background: #2AABEE; color: white; }
+    .btn-primary:hover { background: #1a9bde; }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
-    .btn-primary:hover {
-      background: #1a9bde;
-    }
-
-    .btn-primary:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    /* Error */
     .error-box {
       background: rgba(255,59,48,0.1);
       border: 1px solid rgba(255,59,48,0.3);
@@ -162,12 +137,8 @@
       align-items: center;
       gap: 8px;
     }
+    .error-box.show { display: flex; }
 
-    .error-box.show {
-      display: flex;
-    }
-
-    /* Success */
     .success-box {
       background: rgba(96,208,102,0.1);
       border: 1px solid rgba(96,208,102,0.3);
@@ -181,12 +152,8 @@
       gap: 8px;
       line-height: 1.6;
     }
+    .success-box.show { display: flex; }
 
-    .success-box.show {
-      display: flex;
-    }
-
-    /* Code Display */
     .code-display {
       background: #17212B;
       border-radius: 12px;
@@ -208,7 +175,6 @@
       margin-top: 6px;
     }
 
-    /* Timer */
     .timer {
       text-align: center;
       color: #8E9EAB;
@@ -221,7 +187,6 @@
       font-weight: bold;
     }
 
-    /* Warning */
     .warning-box {
       background: rgba(255,149,0,0.1);
       border-radius: 10px;
@@ -232,7 +197,6 @@
       margin-top: 12px;
     }
 
-    /* Profile card */
     .profile-found {
       display: none;
       background: #17212B;
@@ -242,10 +206,7 @@
       align-items: center;
       gap: 12px;
     }
-
-    .profile-found.show {
-      display: flex;
-    }
+    .profile-found.show { display: flex; }
 
     .avatar {
       width: 44px;
@@ -260,17 +221,9 @@
       flex-shrink: 0;
     }
 
-    .profile-info h3 {
-      font-size: 15px;
-      font-weight: 600;
-    }
+    .profile-info h3 { font-size: 15px; font-weight: 600; }
+    .profile-info p { color: #2AABEE; font-size: 13px; }
 
-    .profile-info p {
-      color: #2AABEE;
-      font-size: 13px;
-    }
-
-    /* Spinner */
     .spinner {
       width: 18px;
       height: 18px;
@@ -280,11 +233,8 @@
       animation: spin 0.8s linear infinite;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* Footer */
     .footer {
       text-align: center;
       color: #8E9EAB;
@@ -292,7 +242,6 @@
       margin-top: 16px;
     }
 
-    /* Back button */
     .back-btn {
       background: none;
       border: none;
@@ -321,19 +270,16 @@
 <body>
 
 <div class="container">
-  <!-- Header -->
   <div class="header">
     <div class="logo">📨</div>
     <h1>Termin</h1>
     <p>تسجيل الدخول عبر رقم الحساب</p>
   </div>
 
-  <!-- Step 1: إدخال الرقم -->
   <div class="card">
+    <!-- Step 1 -->
     <div id="step1" class="step active">
-      <div class="card-title">
-        📱 أدخل رقم حسابك
-      </div>
+      <div class="card-title">📱 أدخل رقم حسابك</div>
 
       <div id="errorBox" class="error-box">
         <span>⚠️</span>
@@ -369,15 +315,11 @@
       </div>
     </div>
 
-    <!-- Step 2: عرض الكود وتأكيده -->
+    <!-- Step 2 -->
     <div id="step2" class="step">
-      <button class="back-btn" onclick="goBack()">
-        ← رجوع
-      </button>
+      <button class="back-btn" onclick="goBack()">← رجوع</button>
 
-      <div class="card-title">
-        🔐 تم إرسال الكود
-      </div>
+      <div class="card-title">🔐 تم إرسال الكود</div>
 
       <div class="success-box show">
         ✅ تم إرسال رمز التحقق إلى حسابك في تطبيق <strong>Termin</strong>.
@@ -408,9 +350,7 @@
     </div>
   </div>
 
-  <div class="footer">
-    Termin © 2024 · جميع الحقوق محفوظة
-  </div>
+  <div class="footer">Termin © 2024 · جميع الحقوق محفوظة</div>
 </div>
 
 <script>
@@ -421,9 +361,8 @@
   let currentProfile = null;
   let generatedCode = '';
   let timerInterval = null;
-
-  // جلب بيانات المستخدم عند الكتابة
   let searchTimeout = null;
+
   document.getElementById('phoneInput').addEventListener('input', function() {
     clearTimeout(searchTimeout);
     const val = this.value;
@@ -434,14 +373,17 @@
     }
   });
 
+  // ── Supabase helpers ──────────────────────────────────────────────────────
+
   async function supabaseGet(table, filters) {
-    let url = `${SUPABASE_URL}/rest/v1/${table}?${filters}&select=*`;
+    const url = `${SUPABASE_URL}/rest/v1/${table}?${filters}&select=*`;
     const res = await fetch(url, {
       headers: {
         'apikey': SUPABASE_KEY,
         'Authorization': `Bearer ${SUPABASE_KEY}`,
       }
     });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   }
 
@@ -456,21 +398,25 @@
       },
       body: JSON.stringify(data),
     });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   }
+
+  // ── Profile lookup ────────────────────────────────────────────────────────
 
   async function lookupProfile(digits) {
     const phone = `+666${digits}`;
     try {
-      const data = await supabaseGet('profiles',
-        `phone=eq.${encodeURIComponent(phone)}`);
+      const data = await supabaseGet('profiles', `phone=eq.${encodeURIComponent(phone)}`);
       if (data && data.length > 0) {
         currentProfile = data[0];
         showProfile(currentProfile);
       } else {
         hideProfile();
       }
-    } catch(e) {}
+    } catch(e) {
+      // صامت — لا نُزعج المستخدم أثناء الكتابة
+    }
   }
 
   function showProfile(p) {
@@ -486,16 +432,56 @@
     document.getElementById('profileFound').classList.remove('show');
   }
 
+  // ── UI helpers ────────────────────────────────────────────────────────────
+
   function showError(msg) {
     const box = document.getElementById('errorBox');
     document.getElementById('errorMsg').textContent = msg;
     box.classList.add('show');
-    setTimeout(() => box.classList.remove('show'), 4000);
+    setTimeout(() => box.classList.remove('show'), 5000);
   }
 
   function generateCode() {
     return Math.floor(10000 + Math.random() * 90000).toString();
   }
+
+  // ── Chat helpers ──────────────────────────────────────────────────────────
+
+  /**
+   * البحث عن محادثة خاصة موجودة بين المستخدم وحساب Termin.
+   * نجلب كل المحادثات الخاصة للمستخدم ثم نُرشّح يدوياً —
+   * هذا يتجنب مشاكل تنسيق cs.{} مع Supabase.
+   */
+  async function findOrCreateChat(profileId) {
+    // جلب كل محادثات المستخدم الخاصة
+    const chats = await supabaseGet(
+      'chats',
+      `type=eq.private&member_ids=cs.%5B%22${profileId}%22%5D`
+    );
+
+    // البحث عن محادثة تحتوي أيضاً على TERMIN_ID
+    if (chats && chats.length > 0) {
+      const existing = chats.find(c =>
+        Array.isArray(c.member_ids) && c.member_ids.includes(TERMIN_ID)
+      );
+      if (existing) return existing.id;
+    }
+
+    // إنشاء محادثة جديدة
+    const now = new Date().toISOString();
+    const newChat = await supabasePost('chats', {
+      type: 'private',
+      member_ids: [profileId, TERMIN_ID],
+      created_at: now,
+      updated_at: now,
+    });
+
+    const chatId = Array.isArray(newChat) ? newChat[0]?.id : newChat?.id;
+    if (!chatId) throw new Error('فشل إنشاء المحادثة');
+    return chatId;
+  }
+
+  // ── Send code ─────────────────────────────────────────────────────────────
 
   async function sendCode() {
     const digits = document.getElementById('phoneInput').value.trim();
@@ -511,9 +497,8 @@
     btn.innerHTML = '<div class="spinner"></div> جاري الإرسال...';
 
     try {
-      // البحث عن المستخدم
-      const profiles = await supabaseGet('profiles',
-        `phone=eq.${encodeURIComponent(phone)}`);
+      // 1. التحقق من وجود المستخدم
+      const profiles = await supabaseGet('profiles', `phone=eq.${encodeURIComponent(phone)}`);
 
       if (!profiles || profiles.length === 0) {
         showError('رقم الحساب غير موجود. تحقق من الرقم وحاول مرة أخرى.');
@@ -524,30 +509,10 @@
       currentProfile = profile;
       generatedCode = generateCode();
 
-      // البحث عن محادثة موجودة مع Termin
-      const chats = await supabaseGet('chats',
-        `type=eq.private&member_ids=cs.{${profile.id},${TERMIN_ID}}`);
+      // 2. إيجاد أو إنشاء المحادثة
+      const chatId = await findOrCreateChat(profile.id);
 
-      let chatId;
-      if (chats && chats.length > 0) {
-        chatId = chats[0].id;
-      } else {
-        // إنشاء محادثة جديدة
-        const newChat = await supabasePost('chats', {
-          type: 'private',
-          member_ids: [profile.id, TERMIN_ID],
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        });
-        chatId = newChat[0]?.id;
-      }
-
-      if (!chatId) {
-        showError('حدث خطأ. حاول مرة أخرى.');
-        return;
-      }
-
-      // إرسال الكود عبر حساب Termin
+      // 3. إرسال الرسالة
       const msgId = `${Date.now()}web`;
       await supabasePost('messages', {
         id: msgId,
@@ -562,24 +527,21 @@
         created_at: new Date().toISOString(),
       });
 
-      // الانتقال للخطوة 2
+      // 4. الانتقال للخطوة 2
       document.getElementById('step1').classList.remove('active');
       document.getElementById('step2').classList.add('active');
-
-      // عرض الكود (للتطوير فقط - في الإنتاج لا تعرضه)
-      // document.getElementById('codeDisplay').style.display = 'block';
-      // document.getElementById('codeNumber').textContent = generatedCode;
-
-      // تشغيل العداد
       startTimer(300);
 
     } catch(e) {
+      console.error('sendCode error:', e);
       showError('حدث خطأ في الاتصال. تحقق من الإنترنت وحاول مجدداً.');
     } finally {
       btn.disabled = false;
       btn.innerHTML = '<span>إرسال الكود</span>';
     }
   }
+
+  // ── Timer ─────────────────────────────────────────────────────────────────
 
   function startTimer(seconds) {
     clearInterval(timerInterval);
@@ -599,14 +561,18 @@
     }, 1000);
   }
 
+  // ── Navigation ────────────────────────────────────────────────────────────
+
   async function resendCode() {
     clearInterval(timerInterval);
+    const savedProfile = currentProfile;
     goBack();
     setTimeout(() => {
-      if (currentProfile) {
+      if (savedProfile) {
         document.getElementById('phoneInput').value =
-          currentProfile.phone.replace('+666', '');
-        showProfile(currentProfile);
+          savedProfile.phone.replace('+666', '');
+        showProfile(savedProfile);
+        currentProfile = savedProfile;
       }
     }, 100);
   }
